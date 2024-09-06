@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MoreOptions from '../../assets/more_options.png';
 
-function ToDo({ id, text, isChecked, onTextChange, onToggleChecked }) {
+function ToDo({ id, text, isChecked, onTextChange, onToggleChecked, done, trash }) {
   const [isEditing, setIsEditing] = useState(false);
   const [todoText, setTodoText] = useState(text); // Initialize with the text prop
 

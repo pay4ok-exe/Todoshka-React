@@ -2,18 +2,33 @@ import './main.css';
 import AddBtn from '../../assets/add.png';
 import ToDo from './ToDo';
 import { useState } from 'react';
+import Modal from './Modal';
 
 function Main() {
   const [todoList, setTodoList] = useState([]); // Initialize with an empty array
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   // Function to add a new todo
-  const addTodo = () => {
+  const addTodo = (text) => {
     const newTodo = {
       id: Date.now(), // Unique ID based on current timestamp
       isChecked: false,
-      text: 'New To Do',
+      done: false,
+      trash: false,
+      text: text || 'New To Do', // Use the provided text or default to 'New To Do'
     };
     setTodoList([...todoList, newTodo]); // Add the new todo to the list
+    closeModal(); // Close the modal after adding the todo
   };
 
   // Function to handle text change in a todo
@@ -41,7 +56,7 @@ function Main() {
           <button className="btn">Trash</button>
         </div>
 
-        <button className="add-btn" onClick={addTodo}>
+        <button className="add-btn" onClick={openModal}>
           <img src={AddBtn} alt="Add Button" />
         </button>
       </div>
@@ -55,14 +70,23 @@ function Main() {
               key={todo.id}
               id={todo.id}
               text={todo.text}
+              done={todo.done}
+              trash={todo.trash}
               isChecked={todo.isChecked}
               onTextChange={handleTextChange}
               onToggleChecked={toggleChecked}
             />
-          ))}
+          )).reverse()}
         </div>
         <hr />
       </div>
+
+      {/* Modal for adding new ToDo */}
+      <Modal 
+        show={isModalOpen} 
+        handleClose={closeModal}
+        handleAdd={addTodo}
+      />
     </div>
   );
 }
