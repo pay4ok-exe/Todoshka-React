@@ -1,5 +1,6 @@
 import './main.css'
 import AddBtn from '../../assets/add.png'
+import ToDo from './ToDo'
 
 function Main() {
     return (
@@ -14,6 +15,16 @@ function Main() {
           <button className='add-btn'>
             <img src={AddBtn}/>
           </button>
+        </div>
+
+        <div className='to-do'>
+          <h1 className='title'> To Do</h1>
+          <hr/>
+          <div className='to-do-list'>
+              <ToDo/>
+              <ToDo/>
+              <ToDo/>
+          </div>
         </div>
       </div>
     )

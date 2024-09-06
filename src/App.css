@@ -13,7 +13,7 @@ body{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 80px 160px;
+  margin: 40px 160px;
 }
 
 .Header{

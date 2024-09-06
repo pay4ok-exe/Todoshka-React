@@ -2,8 +2,10 @@
 .main{
     display: flex;
     margin: 100px 0;
-    /* align-items: center;
-    justify-content: space-between; */
+    flex-direction: column;
+    gap: 20px;
+    /* align-items: center; */
+    /* justify-content: space-between; */
   }
   
   .item-actions{
@@ -11,7 +13,7 @@
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    margin: 0 10px;
+    margin-bottom: 30px;
   }
 
   .control-buttons{
@@ -53,3 +55,87 @@
     width: 24px;
     height: 24px;
   }
+
+  .to-do-list{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    gap: 20px;
+  }
+
+  .to-do-item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .to-do-item img{
+    width: 25px;
+    height: 25px;
+  }
+
+  #todo-check{
+    width: 24px;
+    margin: 0;
+    padding: 0;
+    height: 24px;
+    cursor: pointer;
+    accent-color: transparent;
+    /* border-color: #081E340D; */
+}
+
+#todo-text{
+    height: 23px;
+    width: 650px;
+    /* border: none; */
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    margin-left: 10px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    text-align: left;
+
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: blue
+}
+
+
+#todo-text:focus{
+    outline: none;
+}
+#btn {
+
+    margin: 0;
+    padding: 0 10px;
+    text-align: start;
+    width: 80px;
+    font-family: "Montserrat", system-ui;
+    font-size: 15px;
+    border-radius: 20px;  
+    /* font-weight: 500;
+    line-height: 18px; */
+    text-align: left;
+    /* background-color: #081E340D; */
+    /* border: none; */
+    outline: 0;
+    text-align: center;
+    border-width: 0 0 1px;
+    border-color: #081E340D
+}
+
+.save{
+    margin: 0;
+    justify-self: flex-end;
+    /* color: red; */
+    background-color: #081E340D;
+
+    /* padding: 0; */
+}
+
+.edit{
+    margin: 0;
+}
