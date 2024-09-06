@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import MoreOptions from '../../assets/more_options.png';
 
-function ToDo() {
+function ToDo({ id, text, isChecked, onTextChange, onToggleChecked }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [todoText, setTodoText] = useState('To Do'); // Initial text state
+  const [todoText, setTodoText] = useState(text); // Initialize with the text prop
 
   // Toggle editing state
   const toggleEditMode = () => {
     if (isEditing) {
-      // When switching from editing to viewing, save the data
-      console.log('Final ToDo:', todoText); // Here, you can handle the final submission logic
+      // When switching from editing to viewing, notify the parent component
+      onTextChange(id, todoText); // Notify parent of text change
     }
     setIsEditing(!isEditing);
   };
@@ -19,20 +19,20 @@ function ToDo() {
     setTodoText(e.target.value);
   };
 
-  // Handle losing focus
-  const handleBlur = () => {
-    setIsEditing(false);
-  };
-
   return (
     <div className="to-do-item">
       <img src={MoreOptions} alt="More options" />
-      <input type="checkbox" id="todo-check" />
+      <input 
+        type="checkbox" 
+        id='todo-check'
+        checked={isChecked && !isEditing} 
+        onChange={() => onToggleChecked(id)} // Notify parent of checkbox toggle
+      />
 
       {isEditing ? (
         <input
           type="text"
-          id="todo-text"
+          id='todo-text'
           value={todoText}
           onChange={handleInputChange}
           autoFocus // Automatically focus the input when editing
@@ -40,16 +40,22 @@ function ToDo() {
         />
       ) : (
         <label
-          id="todo-text"
-          className="todo-text"
+          id='todo-text'
+          className={isChecked ? 'checked' : ''}
+          // onClick={toggleEditMode} 
         >
           {todoText}
         </label>
       )}
 
-        <button className={`${isEditing ? 'save' : 'edit'}`} id="btn" onClick={toggleEditMode}>
+      <button 
+        style={{ display: isChecked && !isEditing ? 'none' : 'inline-block' }} 
+        className={`${isEditing ? 'save' : 'edit'}`} 
+        id="btn" 
+        onClick={toggleEditMode}
+      >
         {isEditing ? 'Save' : 'Edit'}
-        </button>
+      </button>
     </div>
   );
 }

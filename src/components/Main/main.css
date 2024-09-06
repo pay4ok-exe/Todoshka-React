@@ -84,6 +84,11 @@
     /* border-color: #081E340D; */
 }
 
+
+.checked{
+  text-decoration: line-through;
+}
+
 #todo-text{
     height: 33px;
     width: 750px;
@@ -126,6 +131,10 @@
     text-align: center;
     border-width: 0 0 1px;
     border-color: #081E340D
+}
+
+.no-visible{
+  display: none;
 }
 
 .save{
