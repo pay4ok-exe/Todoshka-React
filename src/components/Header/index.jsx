@@ -1,4 +1,4 @@
-import Logo from "../../assets/logo.jpeg"
+import Logo from "../../assets/logo.png"
 
 function Header() {
   return (

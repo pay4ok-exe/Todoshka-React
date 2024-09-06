@@ -1,0 +1,55 @@
+
+.main{
+    display: flex;
+    margin: 100px 0;
+    /* align-items: center;
+    justify-content: space-between; */
+  }
+  
+  .item-actions{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 10px;
+  }
+
+  .control-buttons{
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn{
+    text-align: center;
+    height: 40px;
+    width: 85px;
+    border-radius: 100px;  
+    font-family: "Montserrat", system-ui;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    text-align: center;
+    background-color: #081E340D;
+    border: none;
+  }
+
+  .selected{
+    color: white;
+    background-color: #081E346B;
+  }
+
+  .add-btn{
+    background-color: #081E34;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 100px;
+    /* opacity: 0px; */
+  }
+
+  .add-btn img{
+    width: 24px;
+    height: 24px;
+  }
