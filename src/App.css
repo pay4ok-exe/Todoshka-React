@@ -4,4 +4,33 @@ body{
   box-sizing: border-box;
   font-family: "Montserrat", system-ui;
   font-optical-sizing: auto;
+  background-color: #e5eaf1;
+}
+
+.App{
+  display: flex;
+  margin: 80px 160px;
+}
+
+.Header{
+  display: flex;
+  /* justify-content: flex-start; */
+  flex-direction: column;
+  /* gap: -10px; */
+  align-items: flex-start;
+}
+
+.Header div{
+  display: flex;
+  align-items: center;
+}
+
+.Header p{
+  margin-top: 5px; 
+  margin-left: 15px;
+}
+
+.Header img{
+  height: 70px; 
+  width: 70px;
 }
