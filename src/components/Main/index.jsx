@@ -1,13 +1,33 @@
 import './main.css';
 import AddBtn from '../../assets/add.png';
 import ToDo from './ToDo';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from './Modal';
 
 function Main() {
-  const [todoList, setTodoList] = useState([]); // Initialize with an empty array
+  const [todoList, setTodoList] = useState(()=>{
+    
+    const savedTodos = localStorage.getItem('todoList');
+    return savedTodos ? JSON.parse(savedTodos) : [
+    {
+      id: Date.now(), // Unique ID based on current timestamp
+      isChecked: false,
+      done: false,
+      trash: false,
+      text: 'Wake up', // Use the provided text or default to 'New To Do'
+    }
+  ]}); // Initialize with an empty array
+
+  
+
+  useEffect(() => {
+    // Save todos to localStorage whenever the todoList state changes
+    localStorage.setItem('todoList', JSON.stringify(todoList));
+  }, [todoList]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+
 
   const openModal = () => {
     setIsModalOpen(true);

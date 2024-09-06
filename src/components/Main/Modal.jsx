@@ -23,12 +23,12 @@ function Modal({ show, handleClose, handleAdd }) {
     <div className="modal-overlay">
       <div className="modal-content">
         <div className="modal-actions">
-            <h2>Add New ToDo</h2>
+            <h2>Add New To Do</h2>
             <button className="close-btn" onClick={handleClose}>x</button>
         </div>
         <input 
           type="text" 
-          placeholder="Enter your todo"
+          placeholder="Enter your to do"
           className="modal-input"
           value={inputValue}
           onChange={handleInputChange}
