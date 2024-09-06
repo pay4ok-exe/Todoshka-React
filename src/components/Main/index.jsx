@@ -25,6 +25,8 @@ function Main() {
               <ToDo/>
               <ToDo/>
           </div>
+          <hr/>
+
         </div>
       </div>
     )
