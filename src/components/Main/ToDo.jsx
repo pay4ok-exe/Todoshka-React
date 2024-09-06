@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import MoreOptions from '../../assets/more_options.png';
+import MoreOptionsModal from './MoreOptionsModal'
 
-function ToDo({ id, text, isChecked, onTextChange, onToggleChecked, done, trash }) {
+function ToDo({ id, text, isChecked, onTextChange, onToggleChecked, trash, onMoveToTrash, onRestore, onDeleteForever }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [todoText, setTodoText] = useState(text); // Initialize with the text prop
-
+  const [todoText, setTodoText] = useState(text);
+  const [showMoreOptions, setShowMoreOptions] = useState(false);
   // Toggle editing state
   const toggleEditMode = () => {
     if (isEditing) {
@@ -14,6 +15,14 @@ function ToDo({ id, text, isChecked, onTextChange, onToggleChecked, done, trash 
     setIsEditing(!isEditing);
   };
 
+  const handleMoreOptionsModalOpen = () => {
+    setShowMoreOptions(true);
+  };
+
+  const handleMoreOptionsModalClose = () => {
+    setShowMoreOptions(false);
+  };
+
   // Handle text change
   const handleInputChange = (e) => {
     setTodoText(e.target.value);
@@ -21,7 +30,7 @@ function ToDo({ id, text, isChecked, onTextChange, onToggleChecked, done, trash 
 
   return (
     <div className="to-do-item">
-      <img src={MoreOptions} alt="More options" />
+      <img src={MoreOptions}  alt="More options" onClick={handleMoreOptionsModalOpen} />
       <input 
         type="checkbox" 
         id='todo-check'
@@ -56,6 +65,15 @@ function ToDo({ id, text, isChecked, onTextChange, onToggleChecked, done, trash 
       >
         {isEditing ? 'Save' : 'Edit'}
       </button>
+
+      <MoreOptionsModal 
+        show={showMoreOptions} 
+        onClose={handleMoreOptionsModalClose}
+        todo={{ id, trash }}
+        onMoveToTrash={onMoveToTrash}
+        onRestore={onRestore}
+        onDeleteForever={onDeleteForever}
+      />
     </div>
   );
 }

@@ -4,6 +4,7 @@
     margin: 100px 0;
     flex-direction: column;
     gap: 20px;
+    height: 100%;
     /* align-items: center; */
     /* justify-content: space-between; */
   }
@@ -38,6 +39,10 @@
   .selected{
     color: white;
     background-color: #081E346B;
+    font-family: "Montserrat", system-ui;
+    
+    /* background-color: #081E340D; */
+    /* border: none; */
   }
 
   .add-btn{
@@ -60,6 +65,7 @@
     display: flex;
     flex-direction: column;
     margin: 10px 0;
+    /* min-height: 100%; */
     /* gap: 20px; */
   }
 
@@ -230,6 +236,10 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 
   font-family: "Montserrat", system-ui;
   font-size: 15px;
@@ -239,3 +249,34 @@
   line-height: 18px;
   text-align: center;
 }
+
+
+/* MiniModal.css */
+.mini-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mini-modal-content {
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+}
+/* 
+.mini-modal-content button {
+  margin: 10px 0;
+  padding: 10px 20px;
+} */
