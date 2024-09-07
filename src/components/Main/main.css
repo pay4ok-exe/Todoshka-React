@@ -280,3 +280,54 @@
   margin: 10px 0;
   padding: 10px 20px;
 } */
+@media (max-width: 480px){
+
+  .main{
+    /* display: flex; */
+    margin: 20px 0;
+  }
+
+  .item-actions{
+    /* display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between; */
+    margin-bottom: 10px;
+  }
+
+  .btn{
+    height: 30px;
+    width: 75px;
+
+    
+}
+
+.add-btn{
+  width: 60px;
+  height: 40px;
+}
+
+.to-do{
+  margin: 0 -20px;
+}
+
+.to-do hr{
+  margin: auto -10px;
+}
+.to-do-list{
+  margin: 5px -10px;
+  /* min-height: 100%; */
+  /* gap: 20px; */
+}
+
+.to-do-item{
+  gap: 5px;
+  /* padding: 10px; */
+}
+
+#todo-text{
+  height: 33px;
+  width: 100%;
+  font-size: 18px;
+}
+}

@@ -73,7 +73,7 @@ function Main() {
 
   const filteredTodos = todoList.filter(todo => {
     if (selectedFilter === 'To Do') return !todo.checked && !todo.trash;
-    if (selectedFilter === 'Done') return todo.isChecked;
+    if (selectedFilter === 'Done') return todo.isChecked && !todo.trash;
     if (selectedFilter === 'Trash') return todo.trash;
     return true;
   });

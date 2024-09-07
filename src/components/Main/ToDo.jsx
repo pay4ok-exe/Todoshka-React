@@ -58,7 +58,7 @@ function ToDo({ id, text, isChecked, onTextChange, onToggleChecked, trash, onMov
       )}
 
       <button 
-        style={{ display: isChecked && !isEditing ? 'none' : 'inline-block' }} 
+        style={{ display: isChecked && !isEditing || trash? 'none' : 'inline-block' }} 
         className={`${isEditing ? 'save' : 'edit'}`} 
         id="btn" 
         onClick={toggleEditMode}
