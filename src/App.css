@@ -55,6 +55,27 @@ body{
   font-size:medium;
 }
 
+
+@media (max-width: 1199px) {
+  .App {
+    margin: 40px 100px 10px 100px;
+  }
+}
+
+/* For screens smaller than 960px and larger than 760px */
+@media (max-width: 959px) {
+  .App {
+    margin: 40px 80px;
+  }
+}
+
+/* For screens smaller than 760px */
+@media (max-width: 759px) {
+  .App {
+    margin: 40px 60px;
+  }
+}
+
 @media (max-width: 480px){
 
   .App {
@@ -77,26 +98,6 @@ body{
   
   .footer{
     margin: -20px;
-  }
-
-  
   
 }
-
-@media (max-width: 760px) {
-  .App {
-    margin: 40px 60px;
-  }
-}
-
-@media (max-width: 960px) {
-  .App {
-    margin: 40px 80px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .App {
-    margin: 40px 100px 10px 100px;
-  }
 }
