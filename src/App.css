@@ -66,15 +66,37 @@ body{
   }
   
   .Header p{
-    /* margin-top: 5px;  */
-    /* margin-left: 15px; */
     font-size: 16px;
     text-align: center;
+  }
+
+  .footer *{
+    font-size: 10px;
+  }
+
+  
+  .footer{
+    margin: -20px;
   }
 
   
   
 }
 
-@media (max-width: 768px) {
+@media (max-width: 760px) {
+  .App {
+    margin: 40px 60px;
+  }
+}
+
+@media (max-width: 960px) {
+  .App {
+    margin: 40px 80px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .App {
+    margin: 40px 100px 10px 100px;
+  }
 }
