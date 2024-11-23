@@ -1,16 +1,14 @@
-body{
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Montserrat", system-ui;
   font-optical-sizing: auto;
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
   height: 100%;
 }
 
-
-
-.App{
+.App {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -18,43 +16,40 @@ body{
   height: calc(100vh - 50px);
 }
 
-.Header{
+.Header {
   display: flex;
-  /* justify-content: flex-start; */
   flex-direction: column;
-  /* gap: -10px; */
   align-items: flex-start;
 }
 
-.Header div{
+.Header div {
   display: flex;
   align-items: center;
 }
-.Header h1{
+.Header h1 {
   font-size: 34px;
 }
 
-.Header p{
-  margin-top: 5px; 
+.Header p {
+  margin-top: 5px;
   margin-left: 15px;
   font-size: 20px;
 }
 
-.Header img{
-  height: 70px; 
+.Header img {
+  height: 70px;
   width: 70px;
   border-radius: 50%;
 }
 
-.footer{
+.footer {
   display: flex;
   justify-content: space-between;
 }
 
-.footer *{
-  font-size:medium;
+.footer * {
+  font-size: medium;
 }
-
 
 @media (max-width: 1199px) {
   .App {
@@ -62,42 +57,36 @@ body{
   }
 }
 
-/* For screens smaller than 960px and larger than 760px */
 @media (max-width: 959px) {
   .App {
     margin: 40px 80px;
   }
 }
 
-/* For screens smaller than 760px */
 @media (max-width: 759px) {
   .App {
     margin: 40px 60px;
   }
 }
 
-@media (max-width: 480px){
-
+@media (max-width: 480px) {
   .App {
     margin: 20px 50px;
   }
-  .Header h1{
+  .Header h1 {
     font-size: 25px;
-    
   }
-  
-  .Header p{
+
+  .Header p {
     font-size: 16px;
     text-align: center;
   }
 
-  .footer *{
+  .footer * {
     font-size: 10px;
   }
 
-  
-  .footer{
+  .footer {
     margin: -20px;
-  
-}
+  }
 }
