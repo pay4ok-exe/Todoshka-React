@@ -1,16 +1,25 @@
-import React, { useState } from 'react';
-import MoreOptions from '../../assets/more_options.png';
-import MoreOptionsModal from './MoreOptionsModal'
+import React, { useState } from "react";
+import MoreOptions from "../../assets/more_options.png";
+import MoreOptionsModal from "./MoreOptionsModal";
 
-function ToDo({ id, text, isChecked, onTextChange, onToggleChecked, trash, onMoveToTrash, onRestore, onDeleteForever }) {
+function ToDo({
+  id,
+  text,
+  isChecked,
+  onTextChange,
+  onToggleChecked,
+  trash,
+  onMoveToTrash,
+  onRestore,
+  onDeleteForever,
+}) {
   const [isEditing, setIsEditing] = useState(false);
   const [todoText, setTodoText] = useState(text);
   const [showMoreOptions, setShowMoreOptions] = useState(false);
-  // Toggle editing state
+
   const toggleEditMode = () => {
     if (isEditing) {
-      // When switching from editing to viewing, notify the parent component
-      onTextChange(id, todoText); // Notify parent of text change
+      onTextChange(id, todoText);
     }
     setIsEditing(!isEditing);
   };
@@ -23,51 +32,51 @@ function ToDo({ id, text, isChecked, onTextChange, onToggleChecked, trash, onMov
     setShowMoreOptions(false);
   };
 
-  // Handle text change
   const handleInputChange = (e) => {
     setTodoText(e.target.value);
   };
 
   return (
     <div className="to-do-item">
-      <img src={MoreOptions}  alt="More options" onClick={handleMoreOptionsModalOpen} />
-      <input 
-        type="checkbox" 
-        id='todo-check'
-        checked={isChecked && !isEditing} 
-        onChange={() => onToggleChecked(id)} // Notify parent of checkbox toggle
+      <img
+        src={MoreOptions}
+        alt="More options"
+        onClick={handleMoreOptionsModalOpen}
+      />
+      <input
+        type="checkbox"
+        id="todo-check"
+        checked={isChecked && !isEditing}
+        onChange={() => onToggleChecked(id)}
       />
 
       {isEditing ? (
         <input
           type="text"
-          id='todo-text'
+          id="todo-text"
           value={todoText}
           onChange={handleInputChange}
-          autoFocus // Automatically focus the input when editing
+          autoFocus
           className="todo-input"
         />
       ) : (
-        <label
-          id='todo-text'
-          className={isChecked ? 'checked' : ''}
-          // onClick={toggleEditMode} 
-        >
+        <label id="todo-text" className={isChecked ? "checked" : ""}>
           {todoText}
         </label>
       )}
 
-      <button 
-        style={{ display: isChecked && !isEditing || trash? 'none' : 'inline-block' }} 
-        className={`${isEditing ? 'save' : 'edit'}`} 
-        id="btn" 
-        onClick={toggleEditMode}
-      >
-        {isEditing ? 'Save' : 'Edit'}
+      <button
+        style={{
+          display: (isChecked && !isEditing) || trash ? "none" : "inline-block",
+        }}
+        className={`${isEditing ? "save" : "edit"}`}
+        id="btn"
+        onClick={toggleEditMode}>
+        {isEditing ? "Save" : "Edit"}
       </button>
 
-      <MoreOptionsModal 
-        show={showMoreOptions} 
+      <MoreOptionsModal
+        show={showMoreOptions}
         onClose={handleMoreOptionsModalClose}
         todo={{ id, trash }}
         onMoveToTrash={onMoveToTrash}
