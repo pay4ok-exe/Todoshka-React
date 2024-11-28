@@ -16,6 +16,12 @@ function Main() {
             trash: false,
             text: "Wake up",
           },
+          {
+            id: Date.now(),
+            isChecked: true,
+            trash: false,
+            text: "Finish To-Do App",
+          },
         ];
   });
 
