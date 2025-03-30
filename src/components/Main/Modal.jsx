@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
 function Modal({ show, handleClose, handleAdd }) {
   const [inputValue, setInputValue] = useState("");
 
@@ -11,9 +12,16 @@ function Modal({ show, handleClose, handleAdd }) {
   };
 
   const handleAddClick = () => {
-    if (inputValue !== "") {
+    if (inputValue.trim() !== "") {
       handleAdd(inputValue);
       setInputValue("");
+    }
+  };
+
+  // Handle enter key press
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && inputValue.trim() !== "") {
+      handleAddClick();
     }
   };
 
@@ -23,7 +31,7 @@ function Modal({ show, handleClose, handleAdd }) {
         <div className="modal-actions">
           <h2>Add New To Do</h2>
           <button className="close-btn" onClick={handleClose}>
-            x
+            ×
           </button>
         </div>
         <input
@@ -32,6 +40,8 @@ function Modal({ show, handleClose, handleAdd }) {
           className="modal-input"
           value={inputValue}
           onChange={handleInputChange}
+          onKeyDown={handleKeyPress}
+          autoFocus
           required
         />
 

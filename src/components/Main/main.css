@@ -1,6 +1,6 @@
 .main {
   display: flex;
-  margin: 100px 0;
+  margin: 40px 0;
   flex-direction: column;
   gap: 20px;
   height: 100%;
@@ -31,6 +31,12 @@
   text-align: center;
   background-color: #081e340d;
   border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #081e341a;
 }
 
 .selected {
@@ -47,11 +53,38 @@
   width: 52px;
   height: 52px;
   border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.add-btn:hover {
+  background-color: #0f2b4a;
 }
 
 .add-btn img {
   width: 24px;
   height: 24px;
+}
+
+.to-do {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.to-do .title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #081e34;
+}
+
+.to-do hr {
+  border: none;
+  height: 1px;
+  background-color: #eee;
+  margin: 10px 0;
 }
 
 .to-do-list {
@@ -65,65 +98,94 @@
   align-items: center;
   gap: 10px;
   padding: 10px;
+  transition: background-color 0.2s ease;
+  border-radius: 4px;
 }
 
 .to-do-item:hover {
   background-color: #e4e6e7;
 }
 
-.to-do-item img {
-  width: 35px;
-  height: 35px;
+/* Style for completed items */
+.to-do-item.completed-item {
+  background-color: #f8f8f8;
+  /* opacity: 0.8; */
 }
 
-#todo-check {
+.to-do-item img {
   width: 24px;
-  margin: 0;
-  padding: 0;
   height: 24px;
   cursor: pointer;
-  accent-color: transparent;
 }
 
+/* Checkbox styles */
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  accent-color: #081e34;
+}
+
+/* Text with strikethrough when checked */
 .checked {
   text-decoration: line-through;
+  color: #888;
 }
 
 #todo-text {
-  height: 33px;
-  width: 750px;
+  flex: 1;
+  min-height: auto;
   background-color: transparent;
   margin: 0;
-  padding: 0;
+  padding: 8px 0;
   margin-left: 10px;
   font-family: inherit;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 32px;
+  line-height: 1.4;
   text-align: left;
-
-  outline: 0;
-  border-width: 0 0 2px;
-  border-color: blue;
-}
-
-#todo-text:focus {
+  cursor: pointer;
+  border: none;
   outline: none;
 }
+
+.todo-input {
+  flex: 1;
+  min-height: 33px;
+  background-color: white;
+  margin: 0 0 0 10px;
+  padding: 8px;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.4;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+}
+
+.todo-input:focus {
+  border-color: #081e34;
+  box-shadow: 0 0 0 2px rgba(8, 30, 52, 0.1);
+}
+
 #btn {
-  margin: 0;
-  padding: 0 10px;
-  text-align: start;
-  width: 80px;
-  height: 30px;
+  padding: 6px 12px;
+  min-width: 60px;
+  height: auto;
   font-family: "Montserrat", system-ui;
-  font-size: 17px;
-  border-radius: 20px;
-  text-align: left;
-  outline: 0;
+  font-size: 14px;
+  border-radius: 4px;
   text-align: center;
-  border-width: 0 0 1px;
-  border-color: #081e340d;
+  background-color: #f1f1f1;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#btn:hover {
+  background-color: #e0e0e0;
 }
 
 .no-visible {
@@ -131,14 +193,16 @@
 }
 
 .save {
-  margin: 0;
-  text-align: center;
-  background-color: #081e340d;
+  background-color: #4caf50 !important;
+  color: white !important;
 }
 
-.edit {
-  margin: 0;
-  text-align: center;
+.save:hover {
+  background-color: #45a049 !important;
+}
+
+.edit:hover {
+  background-color: #ddd;
 }
 
 .modal-overlay {
@@ -151,29 +215,34 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 }
 
 .modal-content {
   background-color: white;
-  width: 400px;
-  height: 200px;
+  width: 100%;
+  max-width: 400px;
   padding: 20px;
   border-radius: 10px;
-  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 20px;
 }
 
 .modal-input {
-  padding: 20px;
-  border-radius: 5px;
+  padding: 12px;
+  border-radius: 4px;
   border: 1px solid #ccc;
-
   font-family: "Montserrat", system-ui;
   font-size: 16px;
-  font-weight: 500;
-  text-align: left;
+  /* width: 100%; */
+}
+
+.modal-input:focus {
+  outline: none;
+  border-color: #081e34;
+  box-shadow: 0 0 0 2px rgba(8, 30, 52, 0.1);
 }
 
 .modal-actions {
@@ -183,28 +252,32 @@
 }
 
 .modal-actions h2 {
-  padding-left: 100px;
+  margin: 0;
+  font-size: 20px;
+  color: #081e34;
 }
 
 .modal-btn {
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
   font-family: "Montserrat", system-ui;
   font-size: 16px;
-  font-weight: bold;
-  text-align: center;
+  font-weight: 500;
+  background-color: #081e34;
+  color: white;
+  transition: background-color 0.2s ease;
 }
 
 .modal-btn:hover {
-  background-color: #ddd;
+  background-color: #0f2b4a;
 }
 
 .close-btn {
   height: 30px;
   width: 30px;
-  margin: 10px;
+  margin: 0;
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -212,14 +285,16 @@
   justify-content: center;
   align-items: center;
   padding: 0;
-
   font-family: "Montserrat", system-ui;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 16px;
   color: white;
-  background-color: black;
-  line-height: 18px;
-  text-align: center;
+  background-color: #f44336;
+  line-height: 1;
+  transition: background-color 0.2s ease;
+}
+
+.close-btn:hover {
+  background-color: #d32f2f;
 }
 
 .mini-modal-overlay {
@@ -232,6 +307,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 20;
 }
 
 .mini-modal-content {
@@ -239,12 +315,20 @@
   justify-content: space-between;
   align-items: center;
   background: #fff;
-  padding: 20px;
+  padding: 16px;
   border-radius: 8px;
-  width: 300px;
-  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  gap: 10px;
 }
 
+.empty-list {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  font-style: italic;
+}
+
+/* Responsive styles */
 @media (max-width: 480px) {
   .main {
     margin: 20px 0;
@@ -260,17 +344,18 @@
   }
 
   .add-btn {
-    width: 60px;
+    width: 40px;
     height: 40px;
   }
 
   .to-do {
-    margin: 0 -20px;
+    padding: 15px;
   }
 
   .to-do hr {
     margin: auto -10px;
   }
+  
   .to-do-list {
     margin: 5px -10px;
   }
@@ -279,9 +364,24 @@
     gap: 5px;
   }
 
-  #todo-text {
-    height: 33px;
-    width: 100%;
+  #todo-text, .todo-input {
+    font-size: 14px;
+    margin-left: 5px;
+  }
+  
+  .modal-content {
+    width: 90%;
+    margin: 0 20px;
+    padding: 15px;
+  }
+  
+  .modal-actions h2 {
     font-size: 18px;
+  }
+  
+  #btn {
+    font-size: 12px;
+    padding: 4px 8px;
+    min-width: 50px;
   }
 }

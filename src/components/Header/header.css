@@ -1,0 +1,165 @@
+.Header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-container img {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  .logo-container h1 {
+    font-size: 28px;
+    margin: 0;
+  }
+  
+  .nav-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  nav {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .nav-button {
+    padding: 8px 16px;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 20px;
+    font-family: "Montserrat", system-ui;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .nav-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .nav-button.active {
+    background-color: #081e34;
+    color: white;
+  }
+  
+  .user-controls {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .user-info span {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .logout-button, .login-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    font-family: "Montserrat", system-ui;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .logout-button {
+    background-color: #ff5252;
+    color: white;
+  }
+  
+  .login-button {
+    background-color: #081e34;
+    color: white;
+  }
+  
+  .logout-button:hover {
+    background-color: #ff3333;
+  }
+  
+  .login-button:hover {
+    background-color: #0f2b4a;
+  }
+  
+  .header-message {
+    margin-top: 5px;
+    margin-left: 15px;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  
+  @media (max-width: 768px) {
+    .header-content {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .logo-container {
+      margin-bottom: 10px;
+    }
+    
+    .logo-container h1 {
+      font-size: 22px;
+    }
+    
+    .nav-container {
+      width: 100%;
+      justify-content: space-between;
+    }
+    
+    .header-message {
+      text-align: center;
+      margin-left: 0;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo-container img {
+      height: 50px;
+      width: 50px;
+    }
+    
+    .logo-container h1 {
+      font-size: 18px;
+    }
+    
+    .nav-button {
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+    
+    .user-info span {
+      font-size: 14px;
+    }
+    
+    .logout-button, .login-button {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+    
+    .header-message {
+      font-size: 14px;
+    }
+  }

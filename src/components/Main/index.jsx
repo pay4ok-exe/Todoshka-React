@@ -1,35 +1,50 @@
-import "./main.css";
-import AddBtn from "../../assets/add.png";
-import ToDo from "./ToDo";
 import { useEffect, useState } from "react";
+import "./main.css";
+import AddBtn from "../../assets/add.svg";
+import ToDo from "./ToDo";
 import Modal from "./Modal";
+import { useAuth } from "../../context/AuthContext";
+import { 
+  getTodos, 
+  addTodo, 
+  moveToTrash, 
+  restoreTodo, 
+  toggleTodoCompletion, 
+  updateTodo, 
+  deleteTodo 
+} from "../../services/api";
 
 function Main() {
-  const [todoList, setTodoList] = useState(() => {
-    const savedTodos = localStorage.getItem("todoList");
-    return savedTodos
-      ? JSON.parse(savedTodos)
-      : [
-          {
-            id: Date.now(),
-            isChecked: false,
-            trash: false,
-            text: "Wake up",
-          },
-          {
-            id: Date.now(),
-            isChecked: true,
-            trash: false,
-            text: "Finish To-Do App",
-          },
-        ];
-  });
-
-  useEffect(() => {
-    localStorage.setItem("todoList", JSON.stringify(todoList));
-  }, [todoList]);
-
+  const [todoList, setTodoList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState("To Do");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { user } = useAuth();
+
+  // Fetch todos when component mounts
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        setLoading(true);
+        const data = await getTodos();
+        setTodoList(data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching todos:', err.message);
+        setError('Failed to load todos. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (user.isLoggedIn) {
+      fetchTodos();
+    } else {
+      setTodoList([]);
+      setLoading(false);
+    }
+  }, [user.isLoggedIn]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -39,75 +54,107 @@ function Main() {
     setIsModalOpen(false);
   };
 
-  const addTodo = (text) => {
-    const newTodo = {
-      id: Date.now(),
-      isChecked: false,
-      trash: false,
-      text: text || "New To Do",
-    };
-    setTodoList([...todoList, newTodo]);
-    closeModal();
+  const handleAddTodo = async (text) => {
+    try {
+      const newTodo = await addTodo(text);
+      setTodoList([newTodo, ...todoList]);
+      closeModal();
+    } catch (err) {
+      console.error('Error adding todo:', err.message);
+      setError('Failed to add todo. Please try again.');
+    }
   };
 
-  const handleTextChange = (id, newText) => {
-    const updatedList = todoList.map((todo) =>
-      todo.id === id ? { ...todo, text: newText } : todo
-    );
-    setTodoList(updatedList);
+  const handleTextChange = async (id, newText) => {
+    try {
+      const updatedTodo = await updateTodo(id, { text: newText });
+      const updatedList = todoList.map((todo) =>
+        todo._id === id ? updatedTodo : todo
+      );
+      setTodoList(updatedList);
+    } catch (err) {
+      console.error('Error updating todo:', err.message);
+      setError('Failed to update todo. Please try again.');
+    }
   };
 
-  const toggleChecked = (id) => {
-    const updatedList = todoList.map((todo) =>
-      todo.id === id ? { ...todo, isChecked: !todo.isChecked } : todo
-    );
-    setTodoList(updatedList);
+  const handleToggleChecked = async (id) => {
+    try {
+      const todoToUpdate = todoList.find((todo) => todo._id === id);
+      const updatedTodo = await toggleTodoCompletion(id, todoToUpdate.isChecked);
+      const updatedList = todoList.map((todo) =>
+        todo._id === id ? updatedTodo : todo
+      );
+      setTodoList(updatedList);
+    } catch (err) {
+      console.error('Error toggling todo completion:', err.message);
+      setError('Failed to update todo. Please try again.');
+    }
   };
 
   const handleFilterChange = (filter) => {
     setSelectedFilter(filter);
   };
 
-  const [selectedFilter, setSelectedFilter] = useState("To Do");
-
   const filteredTodos = todoList.filter((todo) => {
-    if (selectedFilter === "To Do") return !todo.checked && !todo.trash;
-    if (selectedFilter === "Done") return todo.isChecked && !todo.trash;
+    // For "To Do" page, show both completed and uncompleted tasks, but not trashed ones
+    if (selectedFilter === "To Do") return !todo.trash;
+    // "Trash" page shows only trashed items
     if (selectedFilter === "Trash") return todo.trash;
     return true;
   });
 
-  const moveToTrash = (id) => {
-    const updatedList = todoList.map((todo) =>
-      todo.id === id ? { ...todo, trash: true } : todo
-    );
-    setTodoList(updatedList);
+  const handleMoveToTrash = async (id) => {
+    try {
+      const updatedTodo = await moveToTrash(id);
+      const updatedList = todoList.map((todo) =>
+        todo._id === id ? updatedTodo : todo
+      );
+      setTodoList(updatedList);
+    } catch (err) {
+      console.error('Error moving todo to trash:', err.message);
+      setError('Failed to move todo to trash. Please try again.');
+    }
   };
-  const restoreTodo = (id) => {
-    const updatedList = todoList.map((todo) =>
-      todo.id === id ? { ...todo, trash: false } : todo
-    );
-    setTodoList(updatedList);
+  
+  const handleRestoreTodo = async (id) => {
+    try {
+      const updatedTodo = await restoreTodo(id);
+      const updatedList = todoList.map((todo) =>
+        todo._id === id ? updatedTodo : todo
+      );
+      setTodoList(updatedList);
+    } catch (err) {
+      console.error('Error restoring todo:', err.message);
+      setError('Failed to restore todo. Please try again.');
+    }
   };
 
-  const deleteForever = (id) => {
-    const updatedList = todoList.filter((todo) => todo.id !== id);
-    setTodoList(updatedList);
+  const handleDeleteForever = async (id) => {
+    try {
+      await deleteTodo(id);
+      const updatedList = todoList.filter((todo) => todo._id !== id);
+      setTodoList(updatedList);
+    } catch (err) {
+      console.error('Error deleting todo:', err.message);
+      setError('Failed to delete todo. Please try again.');
+    }
   };
+
+  if (loading) {
+    return <div className="loading-container">Loading todos...</div>;
+  }
 
   return (
     <div className="main">
+      {error && <div className="error-message">{error}</div>}
+      
       <div className="item-actions">
         <div className="control-buttons">
           <button
             className={`btn ${selectedFilter === "To Do" ? "selected" : ""}`}
             onClick={() => handleFilterChange("To Do")}>
             To Do
-          </button>
-          <button
-            className={`btn ${selectedFilter === "Done" ? "selected" : ""}`}
-            onClick={() => handleFilterChange("Done")}>
-            Done
           </button>
           <button
             className={`btn ${selectedFilter === "Trash" ? "selected" : ""}`}
@@ -122,29 +169,35 @@ function Main() {
       </div>
 
       <div className="to-do">
-        <h1 className="title">To Do</h1>
+        <h1 className="title">{selectedFilter}</h1>
         <hr />
         <div className="to-do-list">
-          {filteredTodos
-            .map((todo) => (
+          {filteredTodos.length === 0 ? (
+            <div className="empty-list">
+              {user.isLoggedIn 
+                ? "No items to display" 
+                : "Please log in to view and manage your todos"}
+            </div>
+          ) : (
+            filteredTodos.map((todo) => (
               <ToDo
-                key={todo.id}
-                id={todo.id}
+                key={todo._id}
+                id={todo._id}
                 text={todo.text}
                 trash={todo.trash}
                 isChecked={todo.isChecked}
                 onTextChange={handleTextChange}
-                onToggleChecked={toggleChecked}
-                onMoveToTrash={moveToTrash}
-                onRestore={restoreTodo}
-                onDeleteForever={deleteForever}
+                onToggleChecked={handleToggleChecked}
+                onMoveToTrash={handleMoveToTrash}
+                onRestore={handleRestoreTodo}
+                onDeleteForever={handleDeleteForever}
               />
             ))
-            .reverse()}
+          )}
         </div>
         <hr />
       </div>
-      <Modal show={isModalOpen} handleClose={closeModal} handleAdd={addTodo} />
+      <Modal show={isModalOpen} handleClose={closeModal} handleAdd={handleAddTodo} />
     </div>
   );
 }

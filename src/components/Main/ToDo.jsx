@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import MoreOptions from "../../assets/more_options.png";
 import MoreOptionsModal from "./MoreOptionsModal";
 
@@ -17,8 +17,14 @@ function ToDo({
   const [todoText, setTodoText] = useState(text);
   const [showMoreOptions, setShowMoreOptions] = useState(false);
 
+  // Update local state when props change
+  useEffect(() => {
+    setTodoText(text);
+  }, [text]);
+
   const toggleEditMode = () => {
     if (isEditing) {
+      // Save changes when exiting edit mode
       onTextChange(id, todoText);
     }
     setIsEditing(!isEditing);
@@ -36,8 +42,13 @@ function ToDo({
     setTodoText(e.target.value);
   };
 
+  // Handle checkbox click
+  const handleCheckboxChange = () => {
+    onToggleChecked(id);
+  };
+
   return (
-    <div className="to-do-item">
+    <div className={`to-do-item ${isChecked ? 'completed-item' : ''}`}>
       <img
         src={MoreOptions}
         alt="More options"
@@ -45,9 +56,10 @@ function ToDo({
       />
       <input
         type="checkbox"
-        id="todo-check"
-        checked={isChecked && !isEditing}
-        onChange={() => onToggleChecked(id)}
+        id={`todo-check-${id}`}
+        checked={isChecked}
+        onChange={handleCheckboxChange}
+        disabled={trash}
       />
 
       {isEditing ? (
@@ -60,13 +72,18 @@ function ToDo({
           className="todo-input"
         />
       ) : (
-        <label id="todo-text" className={isChecked ? "checked" : ""}>
+        <label 
+          id="todo-text" 
+          className={isChecked ? "checked" : ""}
+          onClick={() => !trash && handleCheckboxChange()}
+        >
           {todoText}
         </label>
       )}
 
       <button
         style={{
+          // Only show edit button if the task is not checked and not in trash
           display: (isChecked && !isEditing) || trash ? "none" : "inline-block",
         }}
         className={`${isEditing ? "save" : "edit"}`}
